@@ -1,0 +1,105 @@
+<nav class="nav-extended  blue">
+  <div class="nav-wrapper blue">
+    <a href="/" class="brand-logo center">{{title}}</a>
+    <a href="" data-target="barra-lateral" class="sidenav-trigger">
+      <i class="material-icons">menu</i>
+    </a>
+
+    <ul class="left hide-on-med-and-down">
+      <div *ngIf="user">
+        <li>
+          <img src="{{user.photoUrl}}" class="responsive-img img-rounded myCircle circle" alt="">
+        </li>
+        <li>
+          <span class="mySpan">{{user.name}}</span>
+          <span class="mySpan">{{user.email}}</span>
+        </li>
+      </div>
+    </ul>
+
+    <ul class="right hide-on-med-and-down">
+      <div *ngIf="user; else loggerOut">
+        <li>
+          <a routerLink="/">
+            <i class="fas fa-sm fa-home"></i>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/empleados">
+            <i class="fas fa-sm fa-users"></i>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/" (click)="signOut()">
+            <i class="fas fa-sm fa-sign-out-alt">Salir</i>
+          </a>
+        </li>
+      </div>
+    </ul>
+    <!--  -->
+    <ng-template #loggerOut>
+      <li>
+        <a routerLink="/" (click)="signInWithFB()">
+          Facebook <i class="fab fa-md fa-facebook"></i></a>
+      </li>
+      <li>
+        <a routerLink="/" (click)="signInWithGoogle()">
+          Google <i class="fab fa-md fa-google"></i></a>
+      </li>
+    </ng-template>
+
+  </div>
+
+  <div class="nav-content blue">
+
+  </div>
+</nav>
+
+<!-- Barra lateral para resoluciones pequeñas-->
+<ul class="sidenav" id="barra-lateral">
+  <div *ngIf="user">
+    <li>
+      <img src="{{user.photoUrl}}" class="responsive-img myCircle" alt="">
+    </li>
+    <li>
+      <h6>
+        <span class="mySpanSmall">{{user.name}}</span>
+        <span class="mySpanSmall">{{user.email}}</span>
+      </h6>
+    </li>
+    <li class="divider"></li>
+  </div>
+
+
+
+  <div *ngIf="loggerOut; else loggerOutSideNav">
+    <li>
+      <a routerLink="/">
+        <i class="fas fa-sm fa-home">Inicio</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/empleados">
+        Empleados <i class="fas fa-sm fa-users"></i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/" (click)="signOut()">
+        Salir <i class="fas fa-sm fa-sign-out-alt"></i>
+      </a>
+    </li>
+  </div>
+
+  <ng-template #loggerOutSideNav>
+    <li>
+      <a routerLink="/" (click)="signInWithFB()">
+        Facebook <i class="fab fa-sm fa-facebook"></i></a>
+    </li>
+    <li>
+      <a routerLink="/" (click)="signInWithGoogle()">
+        Google <i class="fab fa-sm fa-google"></i></a>
+    </li>
+  </ng-template>
+</ul>
+
+<router-outlet> </router-outlet>
